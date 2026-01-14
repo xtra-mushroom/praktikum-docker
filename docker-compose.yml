@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app-profile: # Service A
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./service-a:/usr/share/nginx/html
+
+  app-catalog: # Service B
+    image: nginx:alpine
+    ports:
+      - "8082:80"
+    volumes:
+      - ./service-b:/usr/share/nginx/html
