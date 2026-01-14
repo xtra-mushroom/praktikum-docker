@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  gateway:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app-profile
+      - app-catalog
+
+  # Service A
+  app-profile:
+    image: nginx:alpine
+    volumes:
+      - ./service-a:/usr/share/nginx/html
+    # Port tidak perlu di-expose ke publik (localhost:8081) lagi 
+    # karena sudah lewat Gateway
+
+  # Service B
+  app-catalog:
+    image: nginx:alpine
+    volumes:
+      - ./service-b:/usr/share/nginx/html
